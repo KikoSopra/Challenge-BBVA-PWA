@@ -1,3 +1,27 @@
-<p>home-component works!</p>
-
-<button class="btn btn-primary" routerLink="game">GAME</button>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="row">
+    <!-- <button class="btn btn-primary" routerLink="game">GAME</button> -->
+    <div class="card text-dark bg-dark p-5">
+      <div class="card-body">
+        <h2 class="mb-3">CREATE NEW PLAYER</h2>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Player name"
+          name="name"
+          [(ngModel)]="player.name"
+        />
+        <div class="d-grid gap-2">
+          <button
+            class="btn btn-primary mt-3"
+            type="button"
+            routerLink="game"
+            [disabled]="player.name === ''"
+          >
+            JOIN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
