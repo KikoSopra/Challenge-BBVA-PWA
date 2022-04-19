@@ -9,14 +9,15 @@
           type="text"
           placeholder="Player name"
           name="name"
+          #name
           [(ngModel)]="player.name"
         />
         <div class="d-grid gap-2">
           <button
             class="btn btn-primary mt-3"
             type="button"
-            routerLink="game"
             [disabled]="player.name === ''"
+            (click)="addPlayer(name)"
           >
             JOIN
           </button>
