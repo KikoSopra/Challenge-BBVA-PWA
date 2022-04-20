@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { faArrowRightFromBracket, faShoePrints } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRightFromBracket,
+  faShoePrints,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-game-component',
   templateUrl: './game-component.component.html',
-  styleUrls: ['./game-component.component.css']
+  styleUrls: ['./game-component.component.css'],
 })
 export class GameComponentComponent implements OnInit {
+  // highScoreLS: number = this.getHighScoreData();
+  // scoreLS: number = this.getScoreData();
 
   highScore: number = this.getHighScoreData();
   score: number = this.getScoreData();
@@ -16,9 +21,11 @@ export class GameComponentComponent implements OnInit {
   faArrowRightFromBracket = faArrowRightFromBracket;
   faShoePrints = faShoePrints;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.getHighScoreData()
+    this.getScoreData()
   }
 
   addPoint() {
@@ -26,6 +33,10 @@ export class GameComponentComponent implements OnInit {
     if (this.score > this.highScore) {
       this.highScore = this.score;
     }
+    this.changeHighScore();
+    this.changeScore();
+    this.getHighScoreData()
+    this.getScoreData()
   }
 
   removePoint() {
@@ -33,6 +44,10 @@ export class GameComponentComponent implements OnInit {
     if (this.score < 0) {
       this.score = 0;
     }
+    this.changeHighScore();
+    this.changeScore();
+    this.getHighScoreData()
+    this.getScoreData()
   }
 
   changeState() {
@@ -44,25 +59,38 @@ export class GameComponentComponent implements OnInit {
   }
 
   getScoreData() {
-    let localStorageItem = JSON.parse(
-      localStorage.getItem('players') || '[]'
-    );
+    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string; }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === 'Luis'
     );
     let sc = item.score;
     return sc;
   }
 
-  getHighScoreData(){
-    let localStorageItem = JSON.parse(
-      localStorage.getItem('players') || '[]'
-    );
+  getHighScoreData() {
+    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string; }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === 'Luis'
     );
     let hs = item.maxScore;
     return hs;
   }
 
+  changeHighScore() {
+    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
+    let item = localStorageItem.find(
+      (item: { name: string }) => item.name === 'Luis'
+    );
+    item.maxScore = this.highScore;
+    localStorage.setItem('players', JSON.stringify(localStorageItem));
+  }
+
+  changeScore() {
+    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
+    let item = localStorageItem.find(
+      (item: { name: string }) => item.name === 'Luis'
+    );
+    item.score = this.score;
+    localStorage.setItem('players', JSON.stringify(localStorageItem));
+  }
 }
