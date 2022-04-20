@@ -22,9 +22,7 @@ export class GameService {
       let item = localStorageItem.find(
         (item: Player) => item.name === player.name
       );
-      if (item) {
-        alert('Player already exists');
-      } else {
+      if (!item) {
         this.players.push(player);
         localStorage.setItem('players', JSON.stringify(this.players));
       }
