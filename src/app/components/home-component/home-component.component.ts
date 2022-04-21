@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 import { Player } from '../../models/player';
 import { GameService } from '../../services/game.service';
@@ -9,7 +10,7 @@ import { GameService } from '../../services/game.service';
   styleUrls: ['./home-component.component.css'],
 })
 export class HomeComponentComponent implements OnInit {
-  constructor(public gameService: GameService) {}
+  constructor(public gameService: GameService, public dataService: DataService) {}
 
   ngOnInit(): void {}
 
@@ -25,5 +26,6 @@ export class HomeComponentComponent implements OnInit {
       score: 0,
       maxScore: 0,
     });
+    this.dataService.playerName = name.value;
   }
 }

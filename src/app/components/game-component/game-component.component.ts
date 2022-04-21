@@ -5,6 +5,8 @@ import {
   faShoePrints,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { DataService } from 'src/app/services/data.service';
+
 @Component({
   selector: 'app-game-component',
   templateUrl: './game-component.component.html',
@@ -21,7 +23,7 @@ export class GameComponentComponent implements OnInit {
   faArrowRightFromBracket = faArrowRightFromBracket;
   faShoePrints = faShoePrints;
 
-  constructor() {}
+  constructor(public dataService: DataService) {}
 
   ngOnInit(): void {
     this.getHighScoreData()
@@ -61,7 +63,7 @@ export class GameComponentComponent implements OnInit {
   getScoreData() {
     let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === this.dataService.playerName
     );
     let sc = item.score;
     return sc;
@@ -70,7 +72,7 @@ export class GameComponentComponent implements OnInit {
   getHighScoreData() {
     let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === this.dataService.playerName
     );
     let hs = item.maxScore;
     return hs;
@@ -79,7 +81,7 @@ export class GameComponentComponent implements OnInit {
   changeHighScore() {
     let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === this.dataService.playerName
     );
     item.maxScore = this.highScore;
     localStorage.setItem('players', JSON.stringify(localStorageItem));
@@ -88,7 +90,7 @@ export class GameComponentComponent implements OnInit {
   changeScore() {
     let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
-      (item: { name: string }) => item.name === 'Luis'
+      (item: { name: string }) => item.name === this.dataService.playerName
     );
     item.score = this.score;
     localStorage.setItem('players', JSON.stringify(localStorageItem));
