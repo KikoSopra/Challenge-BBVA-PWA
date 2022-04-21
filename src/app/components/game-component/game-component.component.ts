@@ -68,12 +68,15 @@ export class GameComponentComponent implements OnInit {
   checkLeft() {
     if(this.state === 'STOP') {
       this.score = 0;
+      this.changeScore();
     } else {
       if(this.isLeft) {
         this.addPoint();
+        this.changeScore();
         this.isLeft = false;
       } else {
         this.removePoint();
+        this.changeScore();
       }
     }
   }
@@ -81,12 +84,15 @@ export class GameComponentComponent implements OnInit {
   checkRight() {
     if(this.state === 'STOP') {
       this.score = 0;
+      this.changeScore();
     } else {
       if(!this.isLeft) {
         this.addPoint();
+        this.changeScore();
         this.isLeft = true;
       } else {
         this.removePoint();
+        this.changeScore();
       }
     }
   }

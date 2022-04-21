@@ -14,3 +14,11 @@ button {
     align-content: center;
     justify-content: center;
 }
+
+.verde {
+    color: rgb(0, 255, 0);
+}
+
+.rojo {
+    color: rgb(255, 0, 0);
+}
