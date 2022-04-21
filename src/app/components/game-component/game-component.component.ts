@@ -13,12 +13,14 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./game-component.component.css'],
 })
 export class GameComponentComponent implements OnInit {
-  // highScoreLS: number = this.getHighScoreData();
-  // scoreLS: number = this.getScoreData();
-
   highScore: number = this.getHighScoreData();
   score: number = this.getScoreData();
-  state: string = 'RUN';
+  state: string = 'STOP';
+
+  redLight: number = 3000;
+  greenLight =
+    this.max(10000 - this.score * 100, 2000) - this.random(-1500, 1500);
+  isLeft: boolean = true;
 
   faArrowRightFromBracket = faArrowRightFromBracket;
   faShoePrints = faShoePrints;
@@ -26,8 +28,19 @@ export class GameComponentComponent implements OnInit {
   constructor(public dataService: DataService) {}
 
   ngOnInit(): void {
-    this.getHighScoreData()
-    this.getScoreData()
+    this.getHighScoreData();
+    this.getScoreData();
+    setInterval(() => {
+      this.changeState();
+    }, 3000);
+  }
+
+  max(a: number, b: number) {
+    return Math.max(a, b);
+  }
+
+  random(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   addPoint() {
@@ -37,8 +50,8 @@ export class GameComponentComponent implements OnInit {
     }
     this.changeHighScore();
     this.changeScore();
-    this.getHighScoreData()
-    this.getScoreData()
+    this.getHighScoreData();
+    this.getScoreData();
   }
 
   removePoint() {
@@ -48,13 +61,51 @@ export class GameComponentComponent implements OnInit {
     }
     this.changeHighScore();
     this.changeScore();
-    this.getHighScoreData()
-    this.getScoreData()
+    this.getHighScoreData();
+    this.getScoreData();
   }
+
+  checkLeft() {
+    if(this.state === 'STOP') {
+      this.score = 0;
+    } else {
+      if(this.isLeft) {
+        this.addPoint();
+        this.isLeft = false;
+      } else {
+        this.removePoint();
+      }
+    }
+  }
+
+  checkRight() {
+    if(this.state === 'STOP') {
+      this.score = 0;
+    } else {
+      if(!this.isLeft) {
+        this.addPoint();
+        this.isLeft = true;
+      } else {
+        this.removePoint();
+      }
+    }
+  }
+
+  // changeState() {
+  //   if (this.state === 'RUN') {
+  //     setTimeout(() => {
+  //       this.state = 'STOP';
+  //     }, this.greenLight);
+  //   } else {
+  //     setTimeout(() => {
+  //       this.state = 'RUN';
+  //     }, this.redLight);
+  //   }
+  // }
 
   changeState() {
     if (this.state === 'RUN') {
-      this.state = 'PAUSE';
+      this.state = 'STOP';
     } else {
       this.state = 'RUN';
     }
@@ -78,15 +129,6 @@ export class GameComponentComponent implements OnInit {
     return hs;
   }
 
-  changeHighScore() {
-    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
-    let item = localStorageItem.find(
-      (item: { name: string }) => item.name === this.dataService.playerName
-    );
-    item.maxScore = this.highScore;
-    localStorage.setItem('players', JSON.stringify(localStorageItem));
-  }
-
   changeScore() {
     let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
     let item = localStorageItem.find(
@@ -95,4 +137,14 @@ export class GameComponentComponent implements OnInit {
     item.score = this.score;
     localStorage.setItem('players', JSON.stringify(localStorageItem));
   }
+
+  changeHighScore() {
+    let localStorageItem = JSON.parse(localStorage.getItem('players') || '[]');
+    let item = localStorageItem.find(
+      (item: { name: string }) => item.name === this.dataService.playerName
+    );
+    item.maxScore = this.highScore;
+    localStorage.setItem('players', JSON.stringify(localStorageItem));
+  }
+  
 }

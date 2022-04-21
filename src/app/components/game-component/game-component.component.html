@@ -21,14 +21,17 @@
   </div>
   <div class="row m-3">
     <div class="col">
-      <button class="btn btn-outline-success" (click)="addPoint()">
+      <button class="btn btn-outline-success" (click)="checkLeft()">
         <fa-icon [icon]="faShoePrints"></fa-icon>
         Left
       </button>
-      <button class="btn btn-outline-success" (click)="removePoint()">
+      <button class="btn btn-outline-success" (click)="checkRight()">
         Right
         <fa-icon [icon]="faShoePrints"></fa-icon>
       </button>
     </div>
   </div>
+  <!-- <div class="row m-3">
+    <h1>Izquierda? : {{ isLeft }}</h1>
+  </div> -->
 </div>
