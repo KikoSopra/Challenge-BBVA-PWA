@@ -15,6 +15,7 @@ export class GameService {
     if (localStorage.getItem('players') === null) {
       this.players.push(player);
       localStorage.setItem('players', JSON.stringify(this.players));
+      console.log(this.players);
     } else {
       let localStorageItem = JSON.parse(
         localStorage.getItem('players') || '[]'
@@ -22,9 +23,10 @@ export class GameService {
       let item = localStorageItem.find(
         (item: Player) => item.name === player.name
       );
-      if (!item) {
-        this.players.push(player);
-        localStorage.setItem('players', JSON.stringify(this.players));
+      
+      if (item === undefined) {
+        localStorageItem.push(player);
+        localStorage.setItem('players', JSON.stringify(localStorageItem));
       }
     }
   }
