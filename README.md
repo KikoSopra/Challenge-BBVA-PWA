@@ -1,3 +1,4 @@
+
 # Challenge BBVA PWA
 
 Un pequeño challenge propuesto por el BBVA que consiste en una pequeña
@@ -42,6 +43,8 @@ una partida en marcha, se continuará desde el punto donde se dejó.
 ## Game
 ![App Screenshot](https://i.imgur.com/mH1Ur2s.png)
 
+## Funcionalidad PWA
+![App Screenshot](https://i.imgur.com/7gnWzEG.png)
 ## Instalación
 
 Cómo descargar el proyecto y correrlo en modo local.
@@ -55,3 +58,14 @@ Cómo descargar el proyecto y correrlo en modo local.
 Esto clonará el proyecto en el directorio deseado, se instalarán las
 dependencias necesarias, y se servirá la aplicación en modo local
 automáticamente (con el flag -o) en el puerto 4200.
+
+Para probar las funcionalidades de la PWA, es necesario correr la aplicación
+con un paquete llamado `http-server`
+
+Su Instalación es muy sencilla. Dentro del directorio del proyecto,
+en la consola, se escribe lo siguiente
+```bash
+    npm install -g http-server
+    http-server -p 8080 -c-1 dist/challenge-bbva-pwa
+```
+Con esto, se servirá la aplicación y se podrá probar como PWA.
