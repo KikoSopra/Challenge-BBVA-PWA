@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'challenge-bbva-pwa'`, () => {
+  it(`should have as title 'Challenge BBVA PWA'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('challenge-bbva-pwa');
+    expect(app.title).toEqual('Challenge BBVA PWA');
   });
 
   it('should render title', () => {

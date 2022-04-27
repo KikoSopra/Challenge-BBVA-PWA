@@ -16,12 +16,9 @@ export class GameComponentComponent implements OnInit {
   highScore: number = this.getHighScoreData();
   score: number = this.getScoreData();
   state: string = 'STOP';
-
   redLight: number = 3000;
-  greenLight =
-    this.max(10000 - this.score * 100, 2000) - this.random(-1500, 1500);
+  greenLight: number = this.max(10000 - this.score * 100, 2000) - this.random(-1500, 1500);
   isLeft: boolean = true;
-
   faArrowRightFromBracket = faArrowRightFromBracket;
   faShoePrints = faShoePrints;
 
@@ -96,18 +93,6 @@ export class GameComponentComponent implements OnInit {
       }
     }
   }
-
-  // changeState() {
-  //   if (this.state === 'RUN') {
-  //     setTimeout(() => {
-  //       this.state = 'STOP';
-  //     }, this.greenLight);
-  //   } else {
-  //     setTimeout(() => {
-  //       this.state = 'RUN';
-  //     }, this.redLight);
-  //   }
-  // }
 
   changeState() {
     if (this.state === 'RUN') {
