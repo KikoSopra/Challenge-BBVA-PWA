@@ -10,6 +10,8 @@ import { GameComponentComponent } from './components/game-component/game-compone
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { GameService } from './services/game.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,13 @@ import { GameService } from './services/game.service';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [GameService],
   bootstrap: [AppComponent]
