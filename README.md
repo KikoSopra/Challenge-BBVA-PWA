@@ -52,7 +52,7 @@ Cómo descargar el proyecto y correrlo en modo local.
 ```bash
   git clone https://github.com/KikoSopra/Challenge-BBVA-PWA.git
   cd challenge-bbva-pwa
-  npm install
+  npm install --force
   ng serve -o
 ```
 Esto clonará el proyecto en el directorio deseado, se instalarán las
